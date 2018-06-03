@@ -1,38 +1,38 @@
-<% if (!@display_user.banned? && !@display_user.get_about_me_for_html_display.empty?) || @is_you %>
+<% if !@display_user.get_about_me_for_html_display.empty? || @is_you %>
   <div class="user_about_me">
-    <%= image_tag "quote-marks.png", :class => "comment_quote" %>
+    <%= image_tag "navimg/quote-open.png", :class => "comment_quote" %>
     <%= @display_user.get_about_me_for_html_display %>
+
     <% if @is_you %>
-      (<%= link_to _("edit text about you"), edit_profile_about_me_path %>)
-    
-      <% if @display_user.tunisian_law %>
+      (<%= link_to _("edit text about you"), set_profile_about_me_path %>)
+
+      <% if @display_user.identity_card_number %>
+        <h4><%= _('Identity Card Number') %>:<h4>
+        <pre><%= @display_user.identity_card_number %></pre>
+      <% end %>
+
+      <% if @display_user.general_law %>
         <h4><%= _('General Law Information') %>:<h4>
         <pre>
-          <% @display_user.tunisian_law.display_attributes.each do |key, value| %>
+          <% @display_user.general_law.display_attributes.each do |key, value| %>
 <%= _(key.humanize) %>: <%= value %>
           <% end %>
         </pre>
       <% end %>
-          
+
     <% end %>
   </div>
 <% end %>
 
-<% if @is_you && !@display_user.banned? %>
-  <p id="user_change_password_email" class="user_change_password_email">
+<% if @is_you %>
+  <p id="user_change_password_email">
     <% if @display_user.profile_photo %>
       <%= link_to _('Change profile photo'), set_profile_photo_path %> |
     <% end %>
-    <%= link_to _('Change your password'), new_password_change_path %> |
-    <%= link_to _('Change your Tunisian Law information'), edit_tunisia_law_path %> |
-    <%= link_to _('Change your email'), signchangeemail_path %>
-    <% if AlaveteliConfiguration.enable_two_factor_auth %>
-    |
-      <% if @display_user.otp_enabled? %>
-        <%= link_to _('View your two factor authentication one time passcode'), one_time_password_path %>
-      <% else %>
-        <%= link_to _('Improve your account security'), one_time_password_path %>
-      <% end %>
-    <% end %>
+
+    <%= link_to _('Change your password'), signchangepassword_path %> |
+    <%= link_to _('Change your email'), signchangeemail_path %> |
+    <%= link_to _('Change your ID Number'), user_edit_identity_card_number_path %> |
+    <%= link_to _('Change your General Law information'), edit_general_law_path %>
   </p>
 <% end %>

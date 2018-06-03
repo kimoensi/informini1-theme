@@ -9,8 +9,11 @@
 <%-# !!!IF YOU CHANGE THE FORMAT OF THE BLOCK BELOW, ADD A NEW CENSOR RULE!!! -%>
 ===================================================================
 # <%= _('Name') %>: <%= @outgoing_message.info_request.user.name %>
-# <%= _('Person Status') %>: <%= @outgoing_message.info_request.user.tunisian_law.display_attributes['person_status'] %>
-# <%= _('Postal Addresse') %>: <%= @outgoing_message.info_request.user.tunisian_law.display_attributes['postal_addresse'] %>
+# <%= _('Identity Card Number') %>: <%= @outgoing_message.info_request.user.identity_card_number %>
+# <%= _('Date of Birth') %>: <%= @outgoing_message.info_request.user.general_law.display_attributes['date_of_birth'] %>
+# <%= _('Marital Status') %>: <%= @outgoing_message.info_request.user.general_law.display_attributes['marital_status'] %>
+# <%= _('Occupation') %>: <%= @outgoing_message.info_request.user.general_law.display_attributes['occupation'] %>
+# <%= _('Domicile') %>: <%= @outgoing_message.info_request.user.general_law.display_attributes['domicile'] %>
 ===================================================================
 
 <%= _('Is {{email_address}} the wrong address for {{type_of_request}} requests to {{public_body_name}}? If so, please contact us using this form:', :email_address => @info_request.public_body.request_email, :type_of_request =>  @info_request.law_used_full, :public_body_name => @info_request.public_body.name)%>

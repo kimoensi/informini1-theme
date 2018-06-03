@@ -8,11 +8,11 @@
 Rails.configuration.to_prepare do
 
   User.class_eval do
-    has_one :tunisian_law, :dependent => :destroy,
+    has_one :general_law, :dependent => :destroy,
                           :validate => true,
                           :autosave => true
 
-    accepts_nested_attributes_for :tunisian_law
+    accepts_nested_attributes_for :general_law
 
     validates :terms,
               :acceptance => {
@@ -21,7 +21,17 @@ Rails.configuration.to_prepare do
                 :allow_nil => false
               }
 
-    validates :tunisian_law,
+    validates :identity_card_number,
+              :presence => {
+                :message => _('Please enter your Identity Card number')
+              },
+              :format => {
+                :with => /\A\d\d\d-\d\d\d\d\d\d-\d\d\d\d[A-Z]\z/,
+                :message => _("Please enter your Identity Card number in the correct format"),
+                :allow_blank => true
+              }
+
+    validates :general_law,
               :presence => {
                 :message => _('Please enter your General Law information')
               }
@@ -46,10 +56,13 @@ Rails.configuration.to_prepare do
                 :email => AlaveteliConfiguration.contact_email,
                 :password => password,
                 :password_confirmation => password,
+                :identity_card_number => '000-000000-0001A',
                 :terms => '1',
-                :tunisian_law_attributes => {
-                  :person_status => 'unknown',
-				  :postal_addresse => 'unknown'
+                :general_law_attributes => {
+                  :date_of_birth => Date.yesterday,
+                  :marital_status => 'unknown',
+                  :occupation => 'unknown',
+                  :domicile => 'unknown'
                 }
             )
             user.save!
