@@ -1,0 +1,16 @@
+<div class="row">
+  <%= f.label :date_of_birth, _('Date of Birth') %>
+  <%= f.date_select :date_of_birth,
+                    { :start_year => Time.now.year - 130,
+                      :end_year => Time.now.year },
+                    :class => 'large-4 columns', :tabindex => 60 %>
+</div>
+
+<%= f.label :domicile, _('Domicile') %>
+<%= f.text_field :domicile, { :size => 15, :tabindex => 70 } %>
+
+<%= f.label :occupation, _('Occupation') %>
+<%= f.text_field :occupation, { :size => 15, :tabindex => 80 } %>
+
+<%= f.label :marital_status, _('Marital Status') %>
+<%= f.text_field :marital_status, { :size => 15, :tabindex => 90 } %>
