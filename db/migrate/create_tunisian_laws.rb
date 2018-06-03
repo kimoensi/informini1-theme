@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateGeneralLaws < ActiveRecord::Migration
+class CreateTunisianLaws < ActiveRecord::Migration
   def self.up
     create_table :tunisian_laws do |t|
       t.column :person_status, :string, :null => false
