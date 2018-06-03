@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class GeneralLaw < ActiveRecord::Base
+class TunisianLaw < ActiveRecord::Base
   belongs_to :user
 
   validates :person_status,
