@@ -1,6 +1,6 @@
 <div id="signup">
 
-<%= form_for(@user_signup,  :as => :user_signup, :url => signup_path, :html => { :id => "signup_form" }) do |f| %>
+  <%= form_tag(signup_path, {:id => "signup_form"}) do %>
     <%= foi_error_messages_for :user_signup %>
 
     <p>
